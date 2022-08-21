@@ -20,15 +20,15 @@ theme: /
         a: Отлично! Из какого Вы города?
         intent: /KnowledgeBase/FAQ.16_08-1 || onlyThisState = false, toState = "/Match"
 
-    state: Bye
-        intent!: /KnowledgeBase/FAQ.16_08-1
-        a: Всего доброго!
-
     state: NoMatch
-        event!: noMatch
+        event!: NoMatch
         a: Я не понял. Вы сказали: {{$request.query}}
 
     state: Match
         event!: match
         a: {{$context.intent.answer}}
-        go!: /Bye
+        intent: /KnowledgeBase/FAQ.16_08-1/Импорт || onlyThisState = false, toState = "/NewState_6"
+
+    state: NewState_6
+        a: {{$context.intent.answer}} || htmlEnabled = false, html = "{{$context.intent.answer}}"
+        intent: Всего доброго!
